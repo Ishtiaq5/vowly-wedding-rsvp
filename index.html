@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vowly - a premium wedding RSVP and seating planner that runs entirely in your browser.">
+<meta name="theme-color" content="#120a1a">
+<title>Vowly - Wedding RSVP &amp; Seating Planner</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="orbs" aria-hidden="true">
+  <span class="orb orb-a"></span>
+  <span class="orb orb-b"></span>
+  <span class="orb orb-c"></span>
+</div>
+
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="Vowly home"><span class="brand-mark" aria-hidden="true">V</span> Vowly</a>
+  <nav class="nav" aria-label="Primary navigation">
+    <a href="#rsvp">RSVP</a>
+    <a href="#guests">Guest list</a>
+    <a href="#seating">Seating</a>
+  </nav>
+  <a class="btn btn-ghost hide-sm" href="#rsvp">Open planner</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <p class="pill">&#10024; Plan the big day without the spreadsheet chaos</p>
+    <h1>Collect RSVPs.<br><span class="grad">Seat everyone.</span><br>Stress less.</h1>
+    <p class="lead">Vowly turns a messy guest list into a calm, live dashboard. Guests reply from a single link,
+      you drag names straight onto a table plan - all in the browser, no accounts, no backend.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#rsvp">Send an RSVP</a>
+      <button class="btn btn-ghost" type="button" id="seed-btn">Load demo wedding</button>
+    </div>
+
+    <ul class="stats" aria-label="Live event statistics">
+      <li class="glass"><strong id="stat-replies">0</strong><span>Replies</span></li>
+      <li class="glass"><strong id="stat-attending">0</strong><span>Attending</span></li>
+      <li class="glass"><strong id="stat-pending">0</strong><span>Awaiting</span></li>
+      <li class="glass"><strong id="stat-seated">0</strong><span>Seated</span></li>
+    </ul>
+  </section>
+
+  <section id="rsvp" class="panel glass">
+    <div class="section-head">
+      <h2>Send your RSVP</h2>
+      <p class="muted">Replies appear instantly in the guest list below.</p>
+    </div>
+    <form id="rsvp-form" class="form" novalidate>
+      <div class="field">
+        <label for="f-name">Full name</label>
+        <input id="f-name" name="name" type="text" placeholder="Aisha &amp; Bilal" autocomplete="name" required aria-required="true">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required aria-required="true">
+      </div>
+      <div class="field row">
+        <div>
+          <label for="f-party">Party size</label>
+          <select id="f-party" name="party">
+            <option value="1">1 guest</option>
+            <option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5 guests</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-status">Will you attend?</label>
+          <select id="f-status" name="status">
+            <option value="attending" selected>Joyfully attending</option>
+            <option value="pending">Still deciding</option>
+            <option value="declined">Sadly can't make it</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-diet">Dietary notes</label>
+        <input id="f-diet" name="diet" type="text" placeholder="Vegetarian, nut allergy...">
+      </div>
+      <div class="field">
+        <label for="f-note">Message to the couple <span class="muted">(optional)</span></label>
+        <textarea id="f-note" name="note" rows="3" placeholder="Can't wait to celebrate with you both!"></textarea>
+      </div>
+      <div class="form-foot">
+        <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Send RSVP</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="guests" class="panel">
+    <div class="section-head spread">
+      <h2>Guest list <span class="count" id="guest-count">0</span></h2>
+      <div class="chips" role="group" aria-label="Filter guest list">
+        <button class="chip is-active" type="button" data-filter="all">All</button>
+        <button class="chip" type="button" data-filter="attending">Attending</button>
+        <button class="chip" type="button" data-filter="pending">Awaiting</button>
+        <button class="chip" type="button" data-filter="declined">Declined</button>
+      </div>
+    </div>
+    <ul class="guest-list" id="guest-list" aria-label="Guests"></ul>
+    <p class="empty" id="guest-empty" hidden>No guests in this view yet - send an RSVP above.</p>
+  </section>
+
+  <section id="seating" class="panel glass">
+    <div class="section-head">
+      <h2>Seating chart</h2>
+      <p class="muted">Drag an attending guest onto a seat. Drop them back into the pool to unseat.</p>
+    </div>
+    <div class="pool" id="pool" data-drop="pool" aria-label="Unseated attending guests">
+      <span class="pool-label">Unseated</span>
+      <div class="pool-items" id="pool-items"></div>
+    </div>
+    <div class="floor" id="floor" aria-label="Table plan"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Vowly - a front-end demo built with vanilla HTML, CSS and JavaScript.</p>
+  <p class="muted">No accounts. No backend. Your data stays in this browser.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/main.js"></script>
+</body>
+</html>
